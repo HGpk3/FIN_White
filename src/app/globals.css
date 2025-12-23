@@ -12,6 +12,8 @@
   --primary-contrast: #f8fafc;
   --secondary: #111827;
   --secondary-contrast: #e2e8f0;
+  --font-geist-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-geist-mono: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 @theme inline {
