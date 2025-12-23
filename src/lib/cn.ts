@@ -26,7 +26,7 @@ function toVal(mix: ClassValue): string {
         }
       }
     }
-  } else if (typeof mix === "object") {
+  } else if (mix && typeof mix === "object") {
     for (k in mix) {
       if (mix[k]) {
         if (str) str += " ";

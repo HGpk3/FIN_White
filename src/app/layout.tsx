@@ -1,16 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "FinWhite — финансовый консалтинг и аутсорсинг",
@@ -25,9 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-[var(--color-background)] text-[var(--color-foreground)] antialiased`}
-      >
+      <body className="bg-[var(--color-background)] text-[var(--color-foreground)] antialiased">
         {children}
       </body>
     </html>
