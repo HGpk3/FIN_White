@@ -21,7 +21,7 @@ export function CountUp({
 }: CountUpProps) {
   const [displayValue, setDisplayValue] = useState(0);
   const ref = useRef<HTMLSpanElement | null>(null);
-  const inView = useInView(ref, { once: true, amount: 0.3 });
+  const inView = useInView(ref, { once: true, amount: 0.35 });
   const prefersReducedMotion = useReducedMotion();
   const targetValue = useMemo(() => Math.round(value), [value]);
 
@@ -29,7 +29,7 @@ export function CountUp({
     if (!inView) return;
 
     if (prefersReducedMotion) {
-      // Respect reduced motion by skipping animation.
+      // Reduced motion: show final value without animation.
       setDisplayValue(targetValue);
       return;
     }

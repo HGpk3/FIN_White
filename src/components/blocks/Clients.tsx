@@ -1,9 +1,11 @@
+"use client";
+
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { Briefcase, Users } from "@/components/ui/icons";
-import { StaggerGroup } from "@/components/motion/StaggerGroup";
-import { TiltCard } from "@/components/motion/TiltCard";
+import { TiltCard } from "@/components/ui/TiltCard";
+import { motion, useReducedMotion } from "framer-motion";
 
 const clientGroups = [
   "Малый и средний бизнес с потребностью в управляемой отчетности",
@@ -13,6 +15,8 @@ const clientGroups = [
 ];
 
 export function Clients() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section id="clients" className="section-ambient py-16 sm:py-20">
       <Container className="space-y-8">
@@ -21,17 +25,25 @@ export function Clients() {
           title="Наши клиенты — это"
           description="Работаем с командами, где важны прозрачность, контроль и управляемость без перегрузки операцией."
         />
-        <StaggerGroup className="grid grid-cols-1 gap-4 sm:grid-cols-2" stagger={0.08}>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {clientGroups.map((group, idx) => (
-            <TiltCard key={group} className="h-full">
-              <Card
-                description={group}
-                icon={idx % 2 === 0 ? <Briefcase size={18} /> : <Users size={18} />}
-                className="bg-[var(--color-surface)]"
-              />
-            </TiltCard>
+            <motion.div
+              key={group}
+              initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.3, ease: "easeOut", delay: idx * 0.06 }}
+            >
+              <TiltCard className="h-full">
+                <Card
+                  description={group}
+                  icon={idx % 2 === 0 ? <Briefcase size={18} /> : <Users size={18} />}
+                  className="bg-[var(--color-surface)]"
+                />
+              </TiltCard>
+            </motion.div>
           ))}
-        </StaggerGroup>
+        </div>
       </Container>
     </section>
   );

@@ -21,7 +21,7 @@ export function TiltCard({ children, className, maxRotate = 5 }: TiltCardProps) 
     const finePointer = window.matchMedia("(pointer: fine)").matches;
     if (!finePointer) return;
 
-    // rAF throttling to keep mouse-driven tilt smooth.
+    // rAF throttle keeps cursor tilt smooth without layout thrash.
     let frameId = 0;
 
     const handleMove = (event: MouseEvent) => {
