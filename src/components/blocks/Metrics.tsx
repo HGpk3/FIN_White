@@ -40,13 +40,14 @@ export function Metrics() {
           description="Работаем на стыке консалтинга и операционного аутсорсинга, чтобы цифры были точными, а решения — быстрыми."
         />
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {metrics.map((metric) => (
+          {metrics.map((metric, index) => (
             <Card
               key={metric.label}
               title={metric.label}
               description={metric.description}
               icon={metric.icon}
-              className="bg-[var(--color-surface)]"
+              className="bg-[var(--color-surface)] animate-fade-up"
+              style={{ animationDelay: `${index * 120}ms` }}
               footer={<span className="text-lg font-semibold text-[var(--color-foreground)]">{metric.value}</span>}
             />
           ))}
