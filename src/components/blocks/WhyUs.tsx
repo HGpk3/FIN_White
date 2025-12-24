@@ -2,6 +2,8 @@ import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { Layers, Shield, Target } from "@/components/ui/icons";
+import { StaggerGroup } from "@/components/motion/StaggerGroup";
+import { TiltCard } from "@/components/motion/TiltCard";
 
 const reasons = [
   {
@@ -26,24 +28,25 @@ const reasons = [
 
 export function WhyUs() {
   return (
-    <section id="whyus" className="py-16 sm:py-20">
+    <section id="whyus" className="section-ambient py-16 sm:py-20">
       <Container className="space-y-8">
         <SectionTitle
           eyebrow="Почему FinWhite"
           title="Премиальный подход к финансовому управлению"
           description="Работаем с владельцами и руководителями, которым нужна точность, скорость и управляемость без лишних слов."
         />
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <StaggerGroup className="grid grid-cols-1 gap-4 sm:grid-cols-3" stagger={0.08}>
           {reasons.map((reason) => (
-            <Card
-              key={reason.title}
-              title={reason.title}
-              description={reason.description}
-              icon={reason.icon}
-              className={`${reason.className} h-full text-[var(--color-foreground)]`}
-            />
+            <TiltCard key={reason.title} className="h-full">
+              <Card
+                title={reason.title}
+                description={reason.description}
+                icon={reason.icon}
+                className={`${reason.className} h-full text-[var(--color-foreground)]`}
+              />
+            </TiltCard>
           ))}
-        </div>
+        </StaggerGroup>
       </Container>
     </section>
   );

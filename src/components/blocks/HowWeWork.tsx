@@ -2,6 +2,8 @@ import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { Calendar, Check, Target } from "@/components/ui/icons";
+import { StaggerGroup } from "@/components/motion/StaggerGroup";
+import { TiltCard } from "@/components/motion/TiltCard";
 
 const steps = [
   {
@@ -28,7 +30,7 @@ const steps = [
 
 export function HowWeWork() {
   return (
-    <section id="how" className="py-16 sm:py-20">
+    <section id="how" className="section-ambient py-16 sm:py-20">
       <Container className="space-y-8">
         <SectionTitle
           eyebrow="Процесс"
@@ -40,17 +42,18 @@ export function HowWeWork() {
             </div>
           }
         />
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <StaggerGroup className="grid grid-cols-1 gap-4 md:grid-cols-3" stagger={0.08}>
           {steps.map((step, index) => (
-            <Card
-              key={step.title}
-              title={`${index + 1}. ${step.title}`}
-              description={step.description}
-              icon={index === steps.length - 1 ? <Target size={18} /> : <Check size={18} />}
-              className="bg-[var(--color-surface)]"
-            />
+            <TiltCard key={step.title} className="h-full">
+              <Card
+                title={`${index + 1}. ${step.title}`}
+                description={step.description}
+                icon={index === steps.length - 1 ? <Target size={18} /> : <Check size={18} />}
+                className="bg-[var(--color-surface)]"
+              />
+            </TiltCard>
           ))}
-        </div>
+        </StaggerGroup>
       </Container>
     </section>
   );

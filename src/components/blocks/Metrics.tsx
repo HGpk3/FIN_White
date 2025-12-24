@@ -1,8 +1,11 @@
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
+import { CountUp } from "@/components/motion/CountUp";
+import { StaggerGroup } from "@/components/motion/StaggerGroup";
+import { TiltCard } from "@/components/motion/TiltCard";
 import { Chart, Clock, FileCheck, Shield } from "@/components/ui/icons";
+import { cn } from "@/lib/cn";
 
 const metrics = [
   {
@@ -38,33 +41,37 @@ const metrics = [
 
 export function Metrics() {
   return (
-    <section id="metrics" className="py-16 sm:py-20">
+    <section id="metrics" className="section-ambient py-16 sm:py-20">
       <Container className="space-y-8">
         <SectionTitle
           eyebrow="Цифры"
           title="Премиальный сервис с измеримым результатом"
           description="Работаем на стыке консалтинга и операционного аутсорсинга, чтобы цифры были точными, а решения — быстрыми."
         />
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {metrics.map((metric, index) => (
-            <Card
-              key={metric.label}
-              title={metric.label}
-              description={metric.description}
-              icon={metric.icon}
-              className="bg-[var(--color-surface)] animate-fade-up"
-              style={{ animationDelay: `${index * 120}ms` }}
-              footer={
-                <AnimatedNumber
-                  value={metric.value}
-                  prefix={metric.prefix}
-                  suffix={metric.suffix}
-                  className="text-lg font-semibold"
+        <StaggerGroup className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.08}>
+          {metrics.map((metric, index) => {
+            const isPrimary = index === 0;
+
+            return (
+              <TiltCard key={metric.label} className={cn("h-full", isPrimary && "lg:col-span-2")}>
+                <Card
+                  title={metric.label}
+                  description={metric.description}
+                  icon={metric.icon}
+                  className={cn("bg-[var(--color-surface)]", isPrimary && "primary-metric primary-metric-glow")}
+                  footer={
+                    <CountUp
+                      value={metric.value}
+                      prefix={metric.prefix}
+                      suffix={metric.suffix}
+                      className="text-lg font-semibold"
+                    />
+                  }
                 />
-              }
-            />
-          ))}
-        </div>
+              </TiltCard>
+            );
+          })}
+        </StaggerGroup>
       </Container>
     </section>
   );
