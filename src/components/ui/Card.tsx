@@ -20,7 +20,7 @@ export function Card({ title, icon, description, className, footer, children, st
       style={style}
     >
       {icon && (
-        <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--surface-strong)] text-[var(--color-accent)] shadow-inner transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-105">
+        <div className="accent-icon flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--surface-strong)] text-[var(--color-accent)] shadow-inner transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-105">
           {icon}
         </div>
       )}
