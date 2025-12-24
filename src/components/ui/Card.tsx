@@ -14,7 +14,7 @@ export function Card({ title, icon, description, className, footer, children, st
   return (
     <div
       className={cn(
-        "card-sheen group relative flex h-full flex-col gap-3 rounded-2xl border border-[var(--color-border)] bg-[var(--surface)]/90 p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-[var(--color-accent)]",
+        "card-sheen group relative flex h-full flex-col gap-3 rounded-2xl border border-[var(--color-border)] bg-[var(--surface)]/90 p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-[var(--color-accent)] glass-panel",
         className,
       )}
       style={style}

@@ -37,6 +37,7 @@ body {
     radial-gradient(circle at 80% 0%, rgba(14, 165, 233, 0.08), transparent 20%),
     radial-gradient(circle at 80% 80%, rgba(248, 200, 120, 0.08), transparent 22%),
     radial-gradient(circle at 20% 80%, rgba(34, 197, 94, 0.08), transparent 24%),
+    linear-gradient(120deg, rgba(148, 163, 184, 0.05), transparent 35%, rgba(96, 165, 250, 0.04)),
     var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -117,6 +118,21 @@ textarea {
   }
 }
 
+@keyframes beam {
+  0% {
+    transform: translateY(-15%) rotate(-2deg);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(10%) rotate(1.5deg);
+    opacity: 0.45;
+  }
+  100% {
+    transform: translateY(-15%) rotate(-2deg);
+    opacity: 0.2;
+  }
+}
+
 @keyframes fade-up {
   0% {
     opacity: 0;
@@ -125,6 +141,16 @@ textarea {
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
   }
 }
 
@@ -142,6 +168,30 @@ textarea {
 
 .animate-fade-up {
   animation: fade-up 0.9s ease-out both;
+}
+
+.animate-breathe {
+  animation: breathe 4.5s ease-in-out infinite;
+}
+
+.hero-beam {
+  position: absolute;
+  inset: -30% 0 auto 0;
+  height: 140%;
+  background: linear-gradient(120deg, rgba(96, 165, 250, 0.18), rgba(248, 200, 120, 0.16), rgba(34, 197, 94, 0.16));
+  filter: blur(80px);
+  mix-blend-mode: screen;
+  animation: beam 12s ease-in-out infinite;
+  opacity: 0.35;
+}
+
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  opacity: 0.2;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
 }
 
 .hero-orb {
@@ -174,6 +224,13 @@ textarea {
   overflow: hidden;
 }
 
+.glass-panel {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.75), rgba(2, 6, 23, 0.92));
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  box-shadow: 0 25px 60px rgba(2, 6, 23, 0.55);
+  backdrop-filter: blur(14px);
+}
+
 .card-sheen::after {
   content: "";
   position: absolute;
@@ -191,4 +248,11 @@ textarea {
   opacity: 0.25;
   animation: shimmer 8s linear infinite;
   pointer-events: none;
+}
+
+.metric-number {
+  background: linear-gradient(120deg, rgba(96, 165, 250, 0.95), rgba(248, 200, 120, 0.9), rgba(34, 197, 94, 0.9));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
