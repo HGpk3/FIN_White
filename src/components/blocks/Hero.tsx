@@ -11,6 +11,7 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-0">
         <div className="hero-orb hero-orb-primary left-[-6rem] top-[-4rem] animate-drift" />
         <div className="hero-orb hero-orb-secondary right-[-4rem] top-[10rem] animate-float-slow" />
+        <div className="hero-orb hero-orb-gold right-[15%] top-[-6rem] animate-float" />
       </div>
       <Container className="relative grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-6">
