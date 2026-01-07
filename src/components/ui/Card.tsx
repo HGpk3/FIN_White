@@ -1,5 +1,5 @@
 import { cn } from "@/lib/cn";
-import type { PropsWithChildren, ReactNode } from "react";
+import type { CSSProperties, PropsWithChildren, ReactNode } from "react";
 
 interface CardProps extends PropsWithChildren {
   title?: string;
@@ -7,18 +7,20 @@ interface CardProps extends PropsWithChildren {
   description?: string;
   className?: string;
   footer?: ReactNode;
+  style?: CSSProperties;
 }
 
-export function Card({ title, icon, description, className, footer, children }: CardProps) {
+export function Card({ title, icon, description, className, footer, children, style }: CardProps) {
   return (
     <div
       className={cn(
-        "group relative flex h-full flex-col gap-3 rounded-2xl border border-[var(--color-border)] bg-[var(--surface)]/90 p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-[var(--color-accent)]",
+        "card-sheen card-border-glow group relative flex h-full flex-col gap-3 rounded-2xl border border-[var(--color-border)] bg-[var(--surface)]/90 p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:scale-[1.02] hover:border-[var(--color-accent)] hover:shadow-xl hover:shadow-black/30 glass-panel",
         className,
       )}
+      style={style}
     >
       {icon && (
-        <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--surface-strong)] text-[var(--color-accent)] shadow-inner">
+        <div className="accent-icon flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--surface-strong)] text-[var(--color-accent)] shadow-inner transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-105">
           {icon}
         </div>
       )}

@@ -1,7 +1,11 @@
+"use client";
+
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { Layers, Shield, Target } from "@/components/ui/icons";
+import { TiltCard } from "@/components/ui/TiltCard";
+import { motion, useReducedMotion } from "framer-motion";
 
 const reasons = [
   {
@@ -25,8 +29,10 @@ const reasons = [
 ];
 
 export function WhyUs() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <section id="whyus" className="py-16 sm:py-20">
+    <section id="whyus" className="section-ambient py-16 sm:py-20">
       <Container className="space-y-8">
         <SectionTitle
           eyebrow="Почему FinWhite"
@@ -34,14 +40,23 @@ export function WhyUs() {
           description="Работаем с владельцами и руководителями, которым нужна точность, скорость и управляемость без лишних слов."
         />
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          {reasons.map((reason) => (
-            <Card
+          {reasons.map((reason, index) => (
+            <motion.div
               key={reason.title}
-              title={reason.title}
-              description={reason.description}
-              icon={reason.icon}
-              className={`${reason.className} h-full text-[var(--color-foreground)]`}
-            />
+              initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.3, ease: "easeOut", delay: index * 0.06 }}
+            >
+              <TiltCard className="h-full">
+                <Card
+                  title={reason.title}
+                  description={reason.description}
+                  icon={reason.icon}
+                  className={`${reason.className} h-full text-[var(--color-foreground)]`}
+                />
+              </TiltCard>
+            </motion.div>
           ))}
         </div>
       </Container>

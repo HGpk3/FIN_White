@@ -1,24 +1,30 @@
-'use client';
+"use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { Mail, Phone } from "@/components/ui/icons";
+import { MagneticButton } from "@/components/ui/MagneticButton";
+import { motion, useReducedMotion } from "framer-motion";
 
 export function LeadForm() {
   const [submitted, setSubmitted] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section id="lead" className="py-16 sm:py-20">
+    <section id="lead" className="section-ambient py-16 sm:py-20">
       <Container className="space-y-8">
         <SectionTitle
           eyebrow="Связаться"
           title="Получить консультацию"
           description="Оставьте контакты, чтобы обсудить задачи и подобрать формат работы: консалтинг или аутсорсинг."
         />
-        <form
-          className="grid grid-cols-1 gap-4 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-lg"
+        <motion.form
+          initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="grid grid-cols-1 gap-4 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-lg glass-panel"
           onSubmit={(event) => {
             event.preventDefault();
             setSubmitted(true);
@@ -86,15 +92,15 @@ export function LeadForm() {
               <span>Согласен на обработку персональных данных и получение информации от FinWhite.</span>
             </label>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <Button type="submit" variant="primary">
+              <MagneticButton type="submit" variant="primary">
                 Отправить заявку
-              </Button>
+              </MagneticButton>
               {submitted && (
                 <span className="text-xs text-[var(--color-muted)]">Заявка сохранена. Мы свяжемся в рабочее время.</span>
               )}
             </div>
           </div>
-        </form>
+        </motion.form>
       </Container>
     </section>
   );
